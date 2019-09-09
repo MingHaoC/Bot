@@ -9,9 +9,8 @@ import java.util.Random;
 
 public class GuildMemberLeave extends ListenerAdapter {
 
-    String messages[] = {"[member] is a Fucking bitch", "WHY ARE YOU RUNNING? [member]", "[member] has left the server.  :("};
+    String messages[] = {"Welcome [member], our newest McDonald employee", "WHY ARE YOU RUNNING? [member]", "[member] has left the server.  :("};
     public void onGuildMemberLeave(GuildMemberLeaveEvent event){
-
         Random rand = new Random();
         int number = rand.nextInt(messages.length);
         EmbedBuilder newMemeber = new EmbedBuilder();

@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 public class Commands extends ListenerAdapter {
 
     public void onGuildMessageReceived(GuildMessageReceivedEvent event){
+        boolean test = false;
         String[] args = event.getMessage().getContentRaw().split("\\s+");
         if(args[0].equalsIgnoreCase(main.prefix)){
             EmbedBuilder info = new EmbedBuilder();
@@ -21,6 +22,7 @@ public class Commands extends ListenerAdapter {
             event.getChannel().sendMessage(info.build()).queue();
             info.clear();
         }
+
     }
 
 }
