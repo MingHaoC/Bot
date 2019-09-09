@@ -7,11 +7,11 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 
-public class main {
+public class Main {
 
     public final static String prefix = "~";
 
-    main() throws Exception{
+    private Main() throws Exception{
         JDA jda = new JDABuilder("NTY5NDU2MDUwNjUxMDA0OTQ1.XLw5Yw.h2m14OKVJssp5MFUO9LeuyOGZWw").build();
         jda.getPresence().setStatus(OnlineStatus.IDLE);
         jda.getPresence().setActivity(Activity.playing("Watching Anime"));
@@ -22,12 +22,12 @@ public class main {
         jda.addEventListener(new GuildMemberLeave());
         jda.addEventListener(new LanuageFilter());
         jda.addEventListener(new FilterUser());
-        new GetLatestAnime(jda);
+        jda.addEventListener(new GetLatestAnime());
     }
 
     public static void main(String arg[]){
         try {
-            new main();
+            new Main();
         } catch (Exception e) {
             e.printStackTrace();
         }
