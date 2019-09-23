@@ -1,4 +1,4 @@
-package Event;
+package com.Event;
 
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;

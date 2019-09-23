@@ -1,7 +1,10 @@
-package Main;
+package com.Main;
 
-import Commands.*;
-import Event.*;
+import com.Commands.*;
+import com.Event.FilterUser;
+import com.Event.GuildMemberJoin;
+import com.Event.GuildMemberLeave;
+import com.Event.LanuageFilter;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -22,7 +25,8 @@ public class Main {
         jda.addEventListener(new GuildMemberLeave());
         jda.addEventListener(new LanuageFilter());
         jda.addEventListener(new FilterUser());
-        jda.addEventListener(new GetLatestAnime());
+        jda.addEventListener(new SearchReddit());
+        jda.addEventListener(new Summon());
     }
 
     public static void main(String arg[]){

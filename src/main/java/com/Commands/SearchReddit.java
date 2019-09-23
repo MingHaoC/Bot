@@ -1,6 +1,6 @@
-package Commands;
+package com.Commands;
 
-import Main.Main;
+//import Main;
 import net.dean.jraw.RedditClient;
 import net.dean.jraw.http.NetworkAdapter;
 import net.dean.jraw.http.OkHttpNetworkAdapter;
@@ -14,10 +14,10 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-import java.util.Objects;
 
-public class GetLatestAnime extends ListenerAdapter {
+import java.util.List;
+
+public class SearchReddit extends ListenerAdapter {
 
     private UserAgent userAgent = new UserAgent("bot", "com.example.usefulbot", "v0.1", "shinobu");
 
@@ -30,7 +30,7 @@ public class GetLatestAnime extends ListenerAdapter {
 
         // Check if user wanted to use this function
         String[] args = event.getMessage().getContentRaw().split("\\s+");
-        if (args[0].equalsIgnoreCase(Main.prefix + "anime")) {
+        if (args[0].equalsIgnoreCase("~" + "reddit") && args.length == 5) {
 
             // Authenticating to Reddit OAuth 2.0
             Credentials credentials = Credentials.script("shinobu-oshino", "snivy11",
@@ -42,27 +42,39 @@ public class GetLatestAnime extends ListenerAdapter {
             // Authenticate and get a RedditClient instance
             RedditClient reddit = OAuthHelper.automatic(adapter, credentials);
 
+            if(Integer.parseInt(args[4]) > 15){
+                event.getChannel().sendMessage("You can't get more than 15 posts per request, please try again");
+            }
 
-            // frontPage() returns a Paginator.Builder
-            DefaultPaginator<Submission> frontPage = reddit.subreddit("Anime").posts()
-                    .sorting(SubredditSort.NEW)
-                    .timePeriod(TimePeriod.DAY)
-                    .limit(200)
-                    .build();
+            else {
+            try{
+               System.out.println(reddit.subreddit(" ").getSubreddit().isEmpty());
+            } catch(IllegalArgumentException e){
+                e.printStackTrace();
+            }
+                // frontPage() returns a Paginator.Builder
+                DefaultPaginator<Submission> frontPage = reddit.subreddit(args[1]).posts()
+                        .sorting(SubredditSort.valueOf(args[2].toUpperCase()))
+                        .timePeriod(TimePeriod.valueOf(args[3].toUpperCase()))
+                        .limit(Integer.parseInt(args[4]))
+                        .build();
 
+                // Get previous message(s) and delete them
 
-            // Get previous message(s) and delete them
-            List<Message> messages = event.getChannel().getHistory().retrievePast(10).complete();
-            event.getChannel().deleteMessages(messages).queue();
-
-            // Get all the new post with "Episode" as their LinkFlairText
-            Listing<Submission> submissions = frontPage.next();
-            for (Submission s : submissions) {
-                if ((Objects.requireNonNull(s.getLinkFlairText()).contains("Episode"))) {
-                    // Outputting the information(s) to discord
-                    event.getChannel().sendMessage("Title: " + s.getTitle() + " Link: https://redd.it/" + s.getId()).queue();
+                if (event.getChannel().getHistory().isEmpty()) {
+                    List<Message> messages = event.getChannel().getHistory().retrievePast(15).complete();
+                    event.getChannel().deleteMessages(messages).queue();
                 }
 
+                // Get all the new post with "Episode" as their LinkFlairText
+                Listing<Submission> submissions = frontPage.next();
+                for (Submission s : submissions) {
+                    //if (s.getLinkFlairText() != null && s.getLinkFlairText().contains("Episode")) {
+                    // Outputting the information(s) to discord
+                    event.getChannel().sendMessage("Title: " + s.getTitle() + " Link: https://redd.it/" + s.getId()).queue();
+                    //}
+
+                }
             }
 
         }

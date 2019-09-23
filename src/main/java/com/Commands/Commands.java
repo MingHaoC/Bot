@@ -1,6 +1,6 @@
-package Commands;
+package com.Commands;
 
-import Main.Main;
+import com.Main.Main;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -21,7 +21,7 @@ public class Commands extends ListenerAdapter {
         if(args[0].equalsIgnoreCase(Main.prefix)){
             // Outputting all information about the bot
             EmbedBuilder info = new EmbedBuilder();
-            info.setTitle("Bot Commands");
+            info.setTitle("Bot com.Commands");
             info.setDescription("You're too dumb to use this bot?  Don't worry I got you!");
             info.addField("Command clear", "~clear #ofmessage(s) (# have to be between 1-100 and the message have to be less then 2 week old).  Also requires ADMINISTRATE authority", false);
             info.addField("Command better calculator", "~calculator operator value1 value2.  Operator(+ | - | / | *)", false);

@@ -1,4 +1,4 @@
-package Event;
+package com.Event;
 
 
 import net.dv8tion.jda.api.EmbedBuilder;
