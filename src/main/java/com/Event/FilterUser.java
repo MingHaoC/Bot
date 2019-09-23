@@ -21,7 +21,7 @@ public class FilterUser extends ListenerAdapter {
             event.getChannel().sendMessage("This bot is so fast that you won't even see this").queue();
             List<Message> messages = event.getChannel().getHistory().retrievePast(2).complete();
             event.getChannel().deleteMessages(messages).queue();
-            event.getChannel().sendMessage("Weegee, you re only allow to speak in weegee channel").queue();
+            event.getChannel().sendMessage("Weegee, you're only allow to speak in weegee channel").queue();
         }
     }
 
