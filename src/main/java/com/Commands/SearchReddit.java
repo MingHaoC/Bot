@@ -36,7 +36,7 @@ public class SearchReddit extends ListenerAdapter {
         String[] args = event.getMessage().getContentRaw().split("\\s+");
         try {
             if (args[0].equalsIgnoreCase("~" + "reddit") && args.length == 5) {
-                BufferedReader in = new BufferedReader(new FileReader("Redditformation.txt"));
+                BufferedReader in = new BufferedReader(new FileReader("RedditInformation.txt"));
                 // Authenticating to Reddit OAuth 2.0
                 Credentials credentials = Credentials.script(in.readLine(), in.readLine(), in.readLine(), in.readLine());
 
