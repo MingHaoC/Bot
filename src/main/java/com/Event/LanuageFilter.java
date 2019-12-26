@@ -78,7 +78,7 @@ public class LanuageFilter extends ListenerAdapter {
             event.getChannel().sendMessage("This bot is so fast that you won't even see this").queue();
             List<Message> messages = event.getChannel().getHistory().retrievePast(2).complete();
             event.getChannel().deleteMessages(messages).queue();
-            event.getChannel().sendMessage("No swearing in my Christan Minecraft server, btw " + Objects.requireNonNull(event.getMember()).getAsMention() + " said the following").queue();
+            event.getChannel().sendMessage("No swearing " + Objects.requireNonNull(event.getMember()).getAsMention() + " said the following").queue();
             event.getChannel().sendMessage(temp).queue();
         }
     }
